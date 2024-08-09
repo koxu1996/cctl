@@ -1,3 +1,13 @@
+Updating public image:
+
+```sh
+docker build . -t cspr-cctl/release-2.0-rc3
+docker tag cspr-cctl/release-2.0-rc3 koxu1996/casper-cctl:2.0-rc3
+docker push koxu1996/casper-cctl:2.0-rc3
+```
+
+---
+
 cctl
 ===============
 
