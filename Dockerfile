@@ -88,6 +88,10 @@ COPY --from=build --chown=cctl:cctl /casper-node ./casper-node
 COPY --from=build --chown=cctl:cctl /casper-sidecar ./casper-sidecar
 COPY --from=build --chown=cctl:cctl /cctl ./cctl
 
+# For fuck sake, enable CORS...
+RUN sed -i "s|cors_origin = ''|cors_origin = '*'|" ~/casper-node/resources/local/config.toml
+RUN sed -i "s|cors_origin = ''|cors_origin = '*'|" ~/casper-sidecar/resources/example_configs/default_rpc_only_config.toml
+
 ENV CCTL="/home/cctl/cctl"
 
 RUN echo "source $CCTL/activate" >> .bashrc
