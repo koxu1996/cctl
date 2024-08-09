@@ -46,8 +46,10 @@ function _main()
     log "Network setup begins"
     log_break
 
-    _teardown
-    log "Network -> tore down existing"
+    if find $(get_path_to_assets) -mindepth 1 -maxdepth 1 | read; then
+        log "Assets directory is not empty; skipping network setup"
+        return
+    fi
 
     _setup_fs "$NODE_COUNT" "$USER_COUNT"
     log "Assets directory -> initialised"

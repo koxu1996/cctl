@@ -1,0 +1,17 @@
+diff --git a/cmds/infra/net/ctl_setup.sh b/cmds/infra/net/ctl_setup.sh
+index b2ccffb..7121e1c 100644
+--- a/cmds/infra/net/ctl_setup.sh
++++ b/cmds/infra/net/ctl_setup.sh
+@@ -46,8 +46,10 @@ function _main()
+     log "Network setup begins"
+     log_break
+ 
+-    _teardown
+-    log "Network -> tore down existing"
++    if find $(get_path_to_assets) -mindepth 1 -maxdepth 1 | read; then
++        log "Assets directory is not empty; skipping network setup"
++        return
++    fi
+ 
+     _setup_fs "$NODE_COUNT" "$USER_COUNT"
+     log "Assets directory -> initialised"
